@@ -1,11 +1,11 @@
 .login-container { 
-  width: 100%;
+  width: 60%;
   max-width: 2000;
   height: 100vh;
-  margin: 0, auto;
+  margin: 32px 500px;
   display: flex;
   align-items: center;
-  justify-content: center;
+
 }
 
 .login-container section.form {
