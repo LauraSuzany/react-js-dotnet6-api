@@ -38,7 +38,7 @@ export default function Books() {
 
   async function EditBook(id){
     try {
-     history(`book/new/${id}`)
+    history(`/book/new/${id}`)
     }catch(error){
       alert('Edit book fieled! Try Again.')
     }

@@ -23,6 +23,7 @@ export default function NewBook() {
     }
 
     const accessToken = localStorage.getItem('accessToken')
+    console.log(accessToken);
     try{
      const response = await api.post('/api/Book/v1', data, {
       headers: {
