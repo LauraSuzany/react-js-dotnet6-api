@@ -11,6 +11,7 @@ export default function NewRoutes() {
               <Routes>
                 <Route path ='/' element={<Login/>}/>
                 <Route path ='/books/' element={<Books/>}/>
+                <Route path ='/book/new' element={<NewBook/>}/>
                 <Route path ='/book/new/:bookId' element={<NewBook/>}/>
               </Routes>
           </BrowserRouter>

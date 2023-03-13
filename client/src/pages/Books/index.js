@@ -62,7 +62,7 @@ export default function Books() {
       <header>
         <img src={logoImage} alt="logo" />
         <span>Bem-vinda, <strong>{userName.toUpperCase()}</strong>!</span>
-        <a className="button" href="/book/new/0">Adicionar novo livro</a>
+        <a className="button" href="/book/new">Adicionar novo livro</a>
         <button type="button">
           <FiPower onClick={Logout} size={18} color="#251fCS5"/>
         </button>
