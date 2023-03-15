@@ -11,24 +11,31 @@ export default function Books() {
 
   const userName = localStorage.getItem('userName');
   const accessToken = localStorage.getItem('accessToken')
-  const [books, setbooks] = useState([]);
+  const authorization =  {
+
+    headers: {
+      Authorization: `Bearer ${accessToken}` }
+    }
+
+  const [books, setBooks] = useState([]);
+  const [page, setPage] = useState(0);
+
   const history = useNavigate();
 
   useEffect(()=>{
-      api.get('/api/Book/v1/asc/20/1', {
-        headers: {
-          Authorization: `Bearer ${accessToken}` 
-        }
-      }).then(response => {setbooks(response.data.list)
-        })
+    FetchMoreBooks();
   }, [accessToken]);
 
+  async function FetchMoreBooks(){
+    //.then(response => {setBooks(response.data.list)
+    const response = await api.get(`/api/Book/v1/asc/4/${page}`, authorization);
+      setBooks([...books, ...response.data.list]);
+      setPage(page+1);
+  }
+  
   async function Logout(){
     try {
-      await api.get(`/api/auth/v1/revoke`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`}
-        });
+      await api.get(`/api/auth/v1/revoke`, authorization);
         localStorage.clear();
         history('/');
     }catch(error){
@@ -46,12 +53,9 @@ export default function Books() {
 
   async function DeleteBook(id){
     try {
-      await api.delete(`/api/Book/v1/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`}
-        });
+      await api.delete(`/api/Book/v1/${id}`, authorization);
 
-        setbooks(books.filter(book => book.id !== id))
+        setBooks(books.filter(book => book.id !== id))
     }catch(error){
       alert('Delete fieled! Try Again.')
     }
@@ -91,6 +95,7 @@ export default function Books() {
         </li>
         ))}
       </ul>
+      <button className="button" onClick={FetchMoreBooks} type="button">Load More</button>
     </div>
   );
 }
